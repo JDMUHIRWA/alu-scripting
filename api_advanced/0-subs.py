@@ -1,15 +1,13 @@
 #!/usr/bin/python3
-""" 0-subs module """
-import requests
+"""
+Retrieve the number of subscribers from the external module 0-subs.py
+The retrieved subscriber count is then printed to the console
+"""
+import sys
 
-
-def number_of_subscribers(subreddit):
-    """ returns the number of subscribers """
-    url = "https://www.reddit.com/r/{}/about.json" \
-        .format(subreddit)
-    headers = {'User-Agent': 'My User Agent 1.0'}
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json().get('data') \
-            .get('subscribers')
-    return 0
+if __name__ == '__main__':
+    number_of_subscribers = __import__('0-subs').number_of_subscribers
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        print("{:d}".format(number_of_subscribers(sys.argv[1])))
