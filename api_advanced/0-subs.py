@@ -7,7 +7,8 @@ module
 import requests
 
 def number_of_subscribers(subreddit):
-    # Define the URL for the subreddit's about page
+    """Function that return the number of subscribers from REDDIT API"""
+
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     
     # Set a custom User-Agent to avoid Too Many Requests error
