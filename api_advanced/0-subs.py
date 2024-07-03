@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""get subscribers numbers function"""
-
+"""Module"""
 
 import json
 import requests
@@ -8,14 +7,25 @@ import sys
 
 
 def number_of_subscribers(subreddit):
-    """get all subscribers"""
-    if len(sys.argv) < 2:
-        return 0
+    """Function that return the number of subscribers from REDDIT API"""
+
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {"User-Agent": "MyRedditBot/1.0 (by YourUsername)"}
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        subscribers = data["data"]["subscribers"]
+        return subscribers
     else:
-        url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-        headers = {"User-Agent": "Mozilla/5.0"}
-        result = requests.get(url, headers=headers, allow_redirects=False)
-        if result.status_code != 200:
-            return 0
-        body = json.loads(result.text)
-        return body["data"]["subscribers"]
+        return 0
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        num_subscribers = number_of_subscribers(subreddit)
+        print(num_subscribers)
