@@ -18,12 +18,16 @@ def top_ten(subreddit):
         response.raise_for_status()
         data = response.json()
 
-        for post in data.get('data', {}).get('children', []):
-            print(post.get('data', {}).get('title'))
-    except requests.exceptions.RequestException as e:
-        print(None)
+        if 'data' in data and 'children' in data['data']:
+            for post in data['data']['children']:
+                print(post['data']['title'])
+            print("OK")
+        else:
+            print("OK")
+    except requests.exceptions.RequestException:
+        print("None")
     except ValueError:
-        print(None)
+        print("None")
 
 
 if __name__ == "__main__":
