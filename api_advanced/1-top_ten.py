@@ -21,9 +21,7 @@ def top_ten(subreddit):
         if 'data' in data and 'children' in data['data']:
             for post in data['data']['children']:
                 print(post['data']['title'])
-            print("OK")
-        else:
-            print("OK")
+        print("OK")
     except requests.exceptions.RequestException:
         print("None")
     except ValueError:
