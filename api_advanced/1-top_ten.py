@@ -21,9 +21,9 @@ def top_ten(subreddit):
         for post in data.get('data', {}).get('children', []):
             print(post.get('data', {}).get('title'))
     except requests.exceptions.RequestException as e:
-        print(OK)
+        print(None)
     except ValueError:
-        print(OK)
+        print(None)
 
 
 if __name__ == "__main__":
